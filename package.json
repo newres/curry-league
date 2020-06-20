@@ -1,0 +1,11 @@
+{
+  "name": "curry-league",
+  "version": "0.0.1",
+  "author": "Newres Al Haider",
+  "synopsis": "An introduction to the Curry programming language with some examples based on League of Legends.",
+  "category": [ "Programming", "Introduction" ],
+  "license": "BSD-3-Clause",
+  "licenseFile": "LICENSE",
+  "dependencies": {
+  }
+}
