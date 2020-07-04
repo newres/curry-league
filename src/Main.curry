@@ -180,6 +180,12 @@ matchChampionAll pref champ =  matchChampionAttack pref champ &&
                                  matchChampionDifficulty pref champ &&
                                  matchChampionTag pref champ
 
+recommendWeak :: Preference -> [Champion] -> [String]
+recommendWeak preference champList = map (\ champion -> name champion) (filter (\ champion -> matchChampionAny preference champion ) champList)
+
+recommendStrong :: Preference -> [Champion] -> [String]
+recommendStrong preference champList = map (\champion -> name champion) (filter (\ champion -> matchChampionAll preference champion ) champList)
+
 example1 :: [Champion]
 example1 = highAttackChamps champions
 
@@ -192,13 +198,42 @@ example3 = matchChampionDifficulty bobPref vayne
 example4 :: Bool
 example4 =  matchChampionTag alicePref karma
 
+example5 :: Bool
+example5 =  matchChampionAny alicePref neeko
+
+example6 :: Bool
+example6 =  matchChampionAll bobPref gnar
+
+example7 :: [String]
+example7 =  recommendWeak alicePref champions
+
+example8 :: [String]
+example8 =  recommendWeak bobPref champions
+
+example9 :: [String]
+example9 =  recommendStrong alicePref champions
+
+example10 :: [String]
+example10 =  recommendStrong bobPref champions
 
 main :: IO ()
 main = putStrLn ("Example 1, champions with more than 5 attack:" ++ "\n" ++
                  (show example1) ++ "\n" ++
-                 "Example 2, matching champion based on attack:" ++ "\n" ++
+                 "Example 2, matching Aatrox with Alice's preferences based on attack:" ++ "\n" ++
                  (show example2) ++ "\n" ++
-                 "Example 3, matching champion based on difficulty:" ++ "\n" ++
+                 "Example 3, matching Vayne with Bob's preferences based on difficulty:" ++ "\n" ++
                  (show example3) ++ "\n" ++
-                 "Example 4, matching champion based on tag:" ++ "\n" ++
-                 (show example4))
+                 "Example 4, matching Karma with Alice's preferences based on tag(s):" ++ "\n" ++
+                 (show example4) ++ "\n" ++
+                 "Example 5, matching Neeko with Alice's preferences based on any matching criteria:" ++ "\n" ++
+                 (show example5) ++ "\n" ++
+                 "Example 6, matching Gnar with Bob's preferences based on all matching criteria:" ++ "\n" ++
+                 (show example6) ++ "\n" ++
+                 "Example 7, recommendation based on a weak criteria for Alice:" ++ "\n" ++
+                 (show example7) ++ "\n" ++
+                 "Example 8, recommendation based on a weak criteria for Bob:" ++ "\n" ++
+                 (show example8) ++ "\n" ++
+                 "Example 9, recommendation based on a strong criteria for Alice:" ++ "\n" ++
+                 (show example9) ++ "\n" ++
+                 "Example 10, recommendation based on a strong criteria for Bob:" ++ "\n" ++
+                 (show example10))
